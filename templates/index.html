@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Data</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="http://127.0.0.1:5000/scrape" role="button">Scrape New Data</a></p>
+      
+    </div>
+
+    <!-- Scraped Data -->
+    {% for output in outputs %}
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="heading"><b>Latest Mars News</b></h4>
+            <p><b>{{output.title}}</b>
+                <br>
+            {{output.paragraph}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content_title">
+                <h4><b>Featured Mars Image</b></h4>
+            </div>
+            <a href={{output.featured_image_url}}>
+                <img width=550 height=325 src={{output.featured_image_url}}>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <p style="border: 1px solid #000; padding:2%"><b>Current Weather on Mars</b>
+            <br>
+            {{output.mars_weather}}
+            </p>
+            <br>
+            <p><b>Mars Facts</b>
+            <br>
+            <table>    
+                {{output.html_table | safe}}
+            </table>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 align="center"><b>Mars Hemispheres</b></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p align="center"; style="border: 1px solid rgb(196, 196, 196); padding:2%">
+                <a href={{output.hemisphere_dict[0].url}}>
+                    <img width=300 height=300 src={{output.hemisphere_dict[0].url}}>
+                </a>
+                <div class="content_title"; align="center">
+                    <h4><b>{{output.hemisphere_dict[0].name}}</b></h4>
+                </div>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p align="center"; style="border: 1px solid rgb(196, 196, 196); padding:2%">
+                <a href={{output.hemisphere_dict[1].url}}>
+                    <img width=300 height=300 src={{output.hemisphere_dict[1].url}}>
+                </a>
+                <div class="content_title"; align="center">
+                    <h4><b>{{output.hemisphere_dict[1].name}}</b></h4>
+                </div>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p align="center"; style="border: 1px solid rgb(196, 196, 196); padding:2%">
+                <a href={{output.hemisphere_dict[2].url}}>
+                    <img width=300 height=300 src={{output.hemisphere_dict[2].url}}>
+                </a>
+                <div class="content_title"; align="center">
+                    <h4><b>{{output.hemisphere_dict[2].name}}</b></h4>
+                </div>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p align="center"; style="border: 1px solid rgb(196, 196, 196); padding:2%">
+                <a href={{output.hemisphere_dict[3].url}}>
+                    <img width=300 height=300 src={{output.hemisphere_dict[3].url}}>
+                </a>
+                <div class="content_title"; align="center">
+                    <h4><b>{{output.hemisphere_dict[3].name}}</b></h4>
+                </div>
+            </p>            
+        </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</body>
+
+</html>
